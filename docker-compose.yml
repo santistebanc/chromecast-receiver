@@ -1,5 +1,6 @@
 services:
   chromecast-receiver:
+    build: .
     container_name: chromecast-receiver
     ports:
       - "8080:8080"
