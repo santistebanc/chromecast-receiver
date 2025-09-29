@@ -3,7 +3,7 @@ FROM node:18-alpine AS builder
 
 WORKDIR /app
 COPY package*.json ./
-RUN npm ci --only=production
+RUN npm install --only=production
 
 # Use nginx for better performance
 FROM nginx:alpine
