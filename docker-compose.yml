@@ -1,11 +1,11 @@
 version: '3.8'
 
 services:
-  test-app:
+  chromecast-receiver:
     build:
       context: .
       dockerfile: Dockerfile.test
-    container_name: test-app
+    container_name: chromecast-receiver
     ports:
       - "8081:8081"
     environment:
@@ -19,15 +19,15 @@ services:
       start_period: 40s
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.test-app.rule=Host(`chromecast-receiver-eoa98f-582647-91-98-85-187.traefik.me`)"
-      - "traefik.http.routers.test-app.tls=true"
-      - "traefik.http.routers.test-app.tls.certresolver=letsencrypt"
-      - "traefik.http.services.test-app.loadbalancer.server.port=8081"
-      - "traefik.http.middlewares.test-cors.headers.accesscontrolallowmethods=GET,POST,OPTIONS"
-      - "traefik.http.middlewares.test-cors.headers.accesscontrolalloworiginlist=*"
-      - "traefik.http.routers.test-app.middlewares=test-cors"
+      - "traefik.http.routers.chromecast-receiver.rule=Host(`chromecast-receiver-eoa98f-582647-91-98-85-187.traefik.me`)"
+      - "traefik.http.routers.chromecast-receiver.tls=true"
+      - "traefik.http.routers.chromecast-receiver.tls.certresolver=letsencrypt"
+      - "traefik.http.services.chromecast-receiver.loadbalancer.server.port=8081"
+      - "traefik.http.middlewares.chromecast-cors.headers.accesscontrolallowmethods=GET,POST,OPTIONS"
+      - "traefik.http.middlewares.chromecast-cors.headers.accesscontrolalloworiginlist=*"
+      - "traefik.http.routers.chromecast-receiver.middlewares=chromecast-cors"
     networks:
-      - test-network
+      - chromecast-network
     logging:
       driver: "json-file"
       options:
@@ -35,5 +35,5 @@ services:
         max-file: "3"
 
 networks:
-  test-network:
+  chromecast-network:
     driver: bridge
