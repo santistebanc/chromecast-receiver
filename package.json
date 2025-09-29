@@ -1,0 +1,21 @@
+{
+  "name": "chromecast-receiver",
+  "version": "1.0.0",
+  "description": "Chromecast receiver app for casting YouTube videos and websites",
+  "main": "index.html",
+  "scripts": {
+    "start": "http-server -p 8081 -c-1",
+    "build": "echo 'No build step required for static HTML'",
+    "deploy": "echo 'Deploy to your hosting service'",
+    "health": "wget --no-verbose --tries=1 --spider http://localhost:8081/ || exit 1"
+  },
+  "dependencies": {
+    "http-server": "^14.1.1"
+  },
+  "keywords": ["chromecast", "receiver", "youtube", "casting"],
+  "author": "",
+  "license": "MIT",
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}

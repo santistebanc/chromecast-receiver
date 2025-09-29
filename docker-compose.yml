@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  chromecast-receiver:
+    build: .
+    container_name: chromecast-receiver
+    ports:
+      - "8081:8081"
+    environment:
+      - NODE_ENV=production
+      - PORT=8081
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:8081/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.chromecast-receiver.rule=Host(`your-domain.com`)"
+      - "traefik.http.routers.chromecast-receiver.tls=true"
+      - "traefik.http.routers.chromecast-receiver.tls.certresolver=letsencrypt"
+      - "traefik.http.services.chromecast-receiver.loadbalancer.server.port=8081"
+    networks:
+      - chromecast-network
+
+networks:
+  chromecast-network:
+    driver: bridge

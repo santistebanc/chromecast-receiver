@@ -1,0 +1,14 @@
+{
+  "name": "YouTube Cast Receiver",
+  "description": "A Chromecast receiver app for casting YouTube videos and websites",
+  "version": "1.0.0",
+  "manifest_version": 2,
+  "permissions": [
+    "https://www.youtube.com/*",
+    "https://www.gstatic.com/*"
+  ],
+  "content_security_policy": "script-src 'self' 'unsafe-inline' https://www.gstatic.com; object-src 'self'",
+  "web_accessible_resources": [
+    "index.html"
+  ]
+}
